@@ -26,7 +26,7 @@ const PREDICTIONS = [
   "Post your drafts today",
 ];
 
-const COOLDOWN_MS = 12 * 60 * 60 * 1000; // 12 hours
+const COOLDOWN_MS = 1000; // 1 second
 
 type View = "idle" | "result";
 
@@ -42,13 +42,31 @@ export default function Home() {
     // Global error handler to catch extension errors
     const handleError = (event: ErrorEvent) => {
       // Ignore errors from browser extensions
-      if (event.filename && event.filename.includes("chrome-extension://")) {
+      if (
+        (event.filename && event.filename.includes("chrome-extension://")) ||
+        (event.message && event.message.includes("chrome-extension://")) ||
+        (event.error && event.error.stack && event.error.stack.includes("chrome-extension://"))
+      ) {
         event.preventDefault();
-        return;
+        event.stopPropagation();
+        return false;
       }
     };
 
-    window.addEventListener("error", handleError);
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      // Ignore unhandled rejections from browser extensions
+      if (
+        event.reason &&
+        (event.reason.toString().includes("chrome-extension://") ||
+          (event.reason.stack && event.reason.stack.includes("chrome-extension://")))
+      ) {
+        event.preventDefault();
+        return false;
+      }
+    };
+
+    window.addEventListener("error", handleError, true);
+    window.addEventListener("unhandledrejection", handleUnhandledRejection);
 
     try {
       const stored = localStorage.getItem("jesse-last-prediction");
@@ -65,7 +83,8 @@ export default function Home() {
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => {
       clearInterval(timer);
-      window.removeEventListener("error", handleError);
+      window.removeEventListener("error", handleError, true);
+      window.removeEventListener("unhandledrejection", handleUnhandledRejection);
     };
   }, []);
 
