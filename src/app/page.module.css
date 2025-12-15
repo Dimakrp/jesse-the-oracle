@@ -345,7 +345,7 @@
 
 .timerContainer {
   position: absolute;
-  bottom: -200px;
+  top: 440px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

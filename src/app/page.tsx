@@ -1,5 +1,6 @@
 "use client";
 
+import { sdk } from "@farcaster/miniapp-sdk";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./page.module.css";
 
@@ -26,7 +27,7 @@ const PREDICTIONS = [
   "Post your drafts today",
 ];
 
-const COOLDOWN_MS = 1000; // 1 second
+const COOLDOWN_MS = 12 * 60 * 60 * 1000; // 12 hours
 
 type View = "idle" | "result";
 
@@ -37,6 +38,10 @@ export default function Home() {
   const [lastPredictionAt, setLastPredictionAt] = useState<number | null>(null);
   const [view, setView] = useState<View>("idle");
   const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    sdk.actions.ready();
+  }, []);
 
   useEffect(() => {
     // Global error handler to catch extension errors
@@ -186,12 +191,6 @@ export default function Home() {
                     ? "Welcome! Tap the button to reveal your fate."
                     : "Come back later"}
                 </div>
-                {!canPredict && (
-                  <div className={styles.timerContainer}>
-                    <span className={styles.timerLabel}>The next fate will be in </span>
-                    <span className={styles.timerValue}>{formatCountdown(remainingMs)}</span>
-                  </div>
-                )}
                 <img
                   src="/pers.png"
                   alt="Jesse pixel portrait"
@@ -205,6 +204,12 @@ export default function Home() {
                 >
                   <span className={styles.buttonText}>Button</span>
                 </button>
+                {remainingMs > 0 && (
+                  <div className={styles.timerContainer}>
+                    <span className={styles.timerLabel}>The next fate will be in </span>
+                    <span className={styles.timerValue}>{formatCountdown(remainingMs)}</span>
+                  </div>
+                )}
               </div>
             </>
           ) : (
