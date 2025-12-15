@@ -234,7 +234,7 @@
   object-fit: contain;
   z-index: 0;
   position: absolute;
-  bottom: 30px;
+  bottom: 130px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
