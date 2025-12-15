@@ -1,0 +1,19 @@
+1. create a next.js app
+
+2. upload wireframes + build the pages
+
+3. build the game logic in the home pages
+
+4. fixes
+
+5. push to the github repo, deploy on vercel
+
+6. docs.base.org >> migrate to the base app (complete sub steps)
+
+7. edit the manifest as needed
+
+8. fetch username from the miniapp
+
+9. addMiniApp logic to pin the app on base miniapp
+
+10. how to configure a database on vercel
