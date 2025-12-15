@@ -229,7 +229,7 @@
 
 .derzImage {
   width: 100%;
-  max-width: 400px;
+  max-width: 267px;
   height: auto;
   object-fit: contain;
   z-index: 0;
@@ -369,11 +369,11 @@
 
 .cta {
   position: absolute;
-  bottom: -166px;
+  top: 220px;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -395,7 +395,7 @@
 .buttonText {
   color: #ffffff;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 32px;
   z-index: 10;
   pointer-events: none;
 }
