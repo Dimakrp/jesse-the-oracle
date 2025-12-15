@@ -5,7 +5,7 @@ function withValidProperties(properties: Record<string, undefined | string | str
 }
 
 export async function GET() {
-  return Response.json({
+return Response.json({
     "accountAssociation": {
       "header": "eyJmaWQiOjE1MzUwNjYsInR5cGUiOiJhdXRoIiwia2V5IjoiMHg5OWJGMDYyRjdFNTRBOWM2MEYwMjc1MmVmQjQ4MTIyNTQ0ZDg3ZmI2In0",
       "payload": "eyJkb21haW4iOiJqZXNzZS10aGUtb3JhY2xlLnZlcmNlbC5hcHAifQ",
