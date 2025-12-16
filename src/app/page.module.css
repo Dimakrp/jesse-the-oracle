@@ -56,6 +56,12 @@
   letter-spacing: 0.3px;
 }
 
+.username span {
+  color: #000;
+  font-weight: 700;
+  font-size: inherit;
+}
+
 .username input {
   border: none;
   outline: none;
