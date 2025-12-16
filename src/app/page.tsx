@@ -1,6 +1,7 @@
 "use client";
 
 import { sdk } from "@farcaster/miniapp-sdk";
+import { useMiniKit } from "@coinbase/onchainkit/minikit";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./page.module.css";
 
@@ -32,6 +33,9 @@ const COOLDOWN_MS = 12 * 60 * 60 * 1000; // 12 hours
 type View = "idle" | "result";
 
 export default function Home() {
+  const { context } = useMiniKit();
+  const isBaseApp = context?.client?.clientFid === 309857;
+  
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [username, setUsername] = useState("username");
   const [prediction, setPrediction] = useState<string | null>(null);
@@ -42,6 +46,12 @@ export default function Home() {
   useEffect(() => {
     sdk.actions.ready();
   }, []);
+
+  useEffect(() => {
+    if (isBaseApp) {
+      console.log("Running in Base App");
+    }
+  }, [isBaseApp]);
 
   useEffect(() => {
     // Global error handler to catch extension errors
