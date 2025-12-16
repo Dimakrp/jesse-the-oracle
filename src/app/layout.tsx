@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Providers } from "./providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +15,9 @@ const geistMono = Geist_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-      other: {
+    title: "Jesse the Oracle",
+    description: "A fast, fun way to challenge friends in real time.",
+    other: {
       'fc:miniapp': JSON.stringify({
           version: 'next',
           imageUrl: 'https://jesse-the-oracle.vercel.app/oraclee.png',
@@ -31,9 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
               },
           },
       }),
-      },
+    },
   };
-  }
+}
 
 export default function RootLayout({
   children,
@@ -43,9 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html>
   );
