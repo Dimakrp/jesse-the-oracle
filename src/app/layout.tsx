@@ -12,10 +12,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Jesse the Oracle",
-  description: "Lightweight Next.js starter with TypeScript and App Router.",
-};
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+      other: {
+      'fc:miniapp': JSON.stringify({
+          version: 'next',
+          imageUrl: 'https://jesse-the-oracle.vercel.app/oraclee.png',
+          button: {
+              title: `Launch Jesse the Oracle`,
+              action: {
+                  type: 'launch_miniapp',
+                  name: 'Jesse the Oracle',
+                  url: 'https://jesse-the-oracle.vercel.app',
+                  splashImageUrl: 'https://jesse-the-oracle.vercel.app/oraclee.png',
+                  splashBackgroundColor: '#000000',
+              },
+          },
+      }),
+      },
+  };
+  }
 
 export default function RootLayout({
   children,
