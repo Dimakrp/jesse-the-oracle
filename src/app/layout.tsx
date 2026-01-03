@@ -15,9 +15,8 @@ const geistMono = Geist_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Jesse the Oracle",
-    description: "A fast, fun way to challenge friends in real time.",
-    other: {
+      other: {
+      'base:app_id': '69402bced19763ca26ddc30f',
       'fc:miniapp': JSON.stringify({
           version: 'next',
           imageUrl: 'https://jesse-the-oracle.vercel.app/oraclee.png',
@@ -32,9 +31,9 @@ export async function generateMetadata(): Promise<Metadata> {
               },
           },
       }),
-    },
+      },
   };
-}
+  }
 
 export default function RootLayout({
   children,
